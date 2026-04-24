@@ -1,0 +1,35 @@
+<nav class="flex items-center py-3 px-8 bg-black sticky top-0 w-full border-b border-white/20">
+    <p class="text-white text-xl px-4">Clarity.AI</p>
+    <ul class="flex items-center gap-4 flex-1 justify-center">
+        <li>
+            <a routerLink="/" 
+               routerLinkActive="text-emerald-500" 
+               [routerLinkActiveOptions]="{exact: true}"
+               class="text-white hover:text-emerald-400 transition-colors cursor-pointer">
+               Web
+            </a>
+        </li>
+        <li class="text-white">
+            <a routerLink="/forum" 
+               routerLinkActive="text-emerald-500"
+               class="text-white hover:text-emerald-400 transition-colors cursor-pointer">
+               Documentación
+            </a>
+        </li>
+        <li>
+            <a routerLink="/forum" 
+               routerLinkActive="text-emerald-500"
+               class="text-white hover:text-emerald-400 transition-colors cursor-pointer">
+               Foro
+            </a>
+        </li>
+    </ul>
+    <div>
+        <button 
+            routerLink="/auth/login"
+            type="button" 
+            class="text-black px-4 font-medium cursor-pointer bg-white hover:bg-emerald-400 py-2 rounded-lg transition-all">
+            Entrar como empresa
+        </button>
+    </div>
+</nav>

@@ -1,0 +1,66 @@
+<div class="timeline-wrapper max-w-4xl mx-auto py-12">
+  <h1 class="text-white text-2xl md:text-6xl font-bold mb-8">
+    Seguridad de Nivel Empresarial
+  </h1>
+
+  <om-timeline [entryGap]="'2rem'" [titleMaxWidth]="'12rem'" [orientation]="'switch'">
+    
+    <om-timeline-entry>
+      <ng-template #timelineTitle>
+        <div class="flex items-center gap-3 justify-end">
+          <span class="text-fuchsia-400 font-bold uppercase tracking-widest text-sm">Privacidad</span>
+          <div class="p-2 bg-fuchsia-500/10 rounded-lg border border-fuchsia-500/20">
+            <svg lucideLockKeyhole class="w-5 h-5 text-fuchsia-400"></svg>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #timelineContent>
+        <div class="space-y-2">
+          <h3 class="text-white font-bold text-2xl">Privacidad Zero-Knowledge</h3>
+          <p class="text-slate-400 leading-relaxed text-xl">
+            Ni siquiera nosotros podemos ver quién envió qué. Nuestra arquitectura garantiza que el feedback se desvincule de la fuente antes de llegar a nuestros servidores.
+          </p>
+        </div>
+      </ng-template>
+    </om-timeline-entry>
+
+    <om-timeline-entry>
+      <ng-template #timelineTitle>
+        <div class="flex items-center gap-3">
+          <div class="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
+            <svg lucideShieldCheck class="w-5 h-5 text-emerald-400"></svg>
+          </div>
+          <span class="text-emerald-400 font-bold uppercase tracking-widest text-sm">Ética</span>
+        </div>
+      </ng-template>
+      <ng-template #timelineContent>
+        <div class="space-y-2">
+          <h3 class="text-white font-bold text-2xl">Moderación Ética</h3>
+          <p class="text-slate-400 leading-relaxed text-xl">
+            Herramientas automatizadas que filtran la toxicidad preservando la verdad cruda del mensaje, asegurando un espacio seguro para el crecimiento profesional.
+          </p>
+        </div>
+      </ng-template>
+    </om-timeline-entry>
+
+    <om-timeline-entry>
+      <ng-template #timelineTitle>
+        <div class="flex items-center gap-3 justify-end">
+          <span class="text-sky-400 font-bold uppercase tracking-widest text-sm">Ecosistema</span>
+          <div class="p-2 bg-sky-500/10 rounded-lg border border-sky-500/20">
+            <svg lucideBlocks class="w-5 h-5 text-sky-400"></svg>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #timelineContent>
+        <div class="space-y-2">
+          <h3 class="text-white font-bold text-2xl">Listo para Integraciones</h3>
+          <p class="text-slate-400 leading-relaxed text-xl">
+            Sincroniza elementos del roadmap directamente con Jira, Slack o Trello para asegurar que el feedback de los empleados se convierta en cambios tangibles.
+          </p>
+        </div>
+      </ng-template>
+    </om-timeline-entry>
+
+  </om-timeline>
+</div>

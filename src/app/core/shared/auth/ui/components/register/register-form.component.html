@@ -1,0 +1,68 @@
+<div class="h-full w-full flex items-center justify-center bg-[#0a0a0a] p-6">
+  <div class="w-full max-w-xl bg-[#121212] border border-white/10 rounded-3xl p-10 shadow-2xl">
+    
+    <div class="flex justify-between mb-10">
+      @for (step of [1,2,3]; track step) {
+        <div class="flex items-center">
+          <div [class]="currentStep() >= step ? 'bg-emerald-500 border-emerald-500' : 'bg-transparent border-gray-600'"
+               class="w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all">
+            {{ step }}
+          </div>
+          @if (step < 3) {
+            <div class="w-12 h-0.5 mx-2" [class]="currentStep() > step ? 'bg-emerald-500' : 'bg-gray-800'"></div>
+          }
+        </div>
+      }
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+
+      @if (currentStep() === 1) {
+        <div class="space-y-4 animate-in fade-in slide-in-from-right-4">
+          <h2 class="text-2xl font-bold text-white">Crea tu cuenta</h2>
+          <input type="email" formControlName="email" placeholder="Correo corporativo" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
+          <input type="password" formControlName="password" placeholder="Contraseña segura" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
+        </div>
+      }
+
+      @if (currentStep() === 2) {
+        <div class="space-y-4 animate-in fade-in slide-in-from-right-4">
+          <h2 class="text-2xl font-bold text-white">Sobre la empresa</h2>
+          <input type="text" formControlName="company_name" placeholder="Nombre de la empresa" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
+          <select formControlName="industry" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
+            <option value="" disabled selected>Selecciona el rubro</option>
+            <option value="tech">Tecnología</option>
+            <option value="retail">Retail / Comercio</option>
+            <option value="education">Educación</option>
+          </select>
+        </div>
+      }
+
+      @if (currentStep() === 3) {
+        <div class="space-y-4 animate-in fade-in slide-in-from-right-4">
+          <h2 class="text-2xl font-bold text-white">Datos de contacto</h2>
+          <input type="text" formControlName="phone" placeholder="Número de celular" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
+          <textarea formControlName="description" placeholder="Breve descripción..." rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"></textarea>
+        </div>
+      }
+
+      <div class="flex gap-4 pt-6">
+        @if (currentStep() > 1) {
+          <button type="button" (click)="prevStep()" class="flex-1 px-6 py-3 border border-white/10 rounded-xl text-gray-300 hover:bg-white/5 transition-all">
+            Atrás
+          </button>
+        }
+
+        @if (currentStep() < 3) {
+          <button type="button" (click)="nextStep()" class="flex-1 px-6 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-all">
+            Continuar
+          </button>
+        } @else {
+          <button type="submit" [disabled]="form.invalid" class="flex-1 px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-500 disabled:opacity-50 transition-all shadow-lg shadow-emerald-900/20">
+            Finalizar Registro
+          </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>
