@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { AuthPort } from "../../application/ports/auth.port";
-import { SupabaseClient } from "@supabase/supabase-js";
+import { Session, SupabaseClient } from "@supabase/supabase-js";
 import { CompanyAccountEntity } from "../../domain/entities/company-account.entity";
 import { SignIgDto } from "../../application/dtos/sign-in.dto";
 import { CompannyMapper } from "../mappers/companny.mapper";
 import { SignUpDto } from "../../application/dtos/sign-up.dto";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class AuthAdapterService implements AuthPort{
@@ -56,5 +57,21 @@ export class AuthAdapterService implements AuthPort{
         }
 
         return CompannyMapper.mapToEntity(user);
+    }
+
+
+    async isAuthenticated(): Promise<boolean> {
+        const { data: { session } } = await this.supabase.auth.getSession();
+        return !!session;
+    }
+
+
+    sessionState$(): Observable<Session | null> {
+        return new Observable(observer => {
+            const { data: { subscription } } = this.supabase.auth.onAuthStateChange((event, session) => {
+                observer.next(session);
+            });
+            return () => subscription.unsubscribe();
+        });
     }
 }
