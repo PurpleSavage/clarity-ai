@@ -11,5 +11,7 @@ export class AuthStateService{
         this.session.set(session)
     }
     
-    
+    getSession(){
+        return this.session()
+    }
 }

@@ -8,7 +8,6 @@ import { RegisterFormComponent } from "../components/register/register-form.comp
     templateUrl:'./auth-layout.component.html',
     imports:[
         RouterOutlet,
-  
     ],
     selector: 'app-auth-layout',
     standalone: true,

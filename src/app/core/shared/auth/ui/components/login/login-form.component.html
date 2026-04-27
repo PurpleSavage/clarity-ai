@@ -66,9 +66,10 @@
 
       <p class="text-center text-sm text-gray-500 mt-6">
         ¿No tienes cuenta? 
-        <a href="#" class="text-white font-medium hover:underline">Regístrate gratis</a>
+        <a routerLink="/auth/register" class="text-white font-medium hover:underline">Regístrate gratis</a>
       </p>
 
     </form>
+    <p class="text-red-500 text-sm mt-2">{{ errorMessage() }}</p>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -7,10 +7,12 @@ import { AuthStateService } from "../../../state/auth-state.service";
 import { SignInUseCase } from "../../../application/use-cases/sign-in.use-case";
 import { AuthAdapterService } from "../../../infrastructure/adapters/auth.service";
 import { AuthPort } from "../../../application/ports/auth.port";
+import { AppError } from "../../../../common/infrastructure/errors/base-error";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
     templateUrl:'./login-form.component.html',
-    imports:[ReactiveFormsModule],
+    imports:[ReactiveFormsModule,RouterLink],
     providers:[
         SignInUseCase,
         { provide: AuthPort, useClass: AuthAdapterService },
@@ -19,15 +21,17 @@ import { AuthPort } from "../../../application/ports/auth.port";
     standalone: true,
 })
 export class LoginFormComponent{
-    constructor(
-        private signInUseCase: SignInUseCase,
-        private authStateService:AuthStateService
-    ){}
+    private signInUseCase = inject(SignInUseCase)
+    private authStateService = inject(AuthStateService)
+    private router = inject(Router)
 
+
+    errorMessage=signal<string>('')
+    isPendingLogin = signal(false)
     form = new FormGroup({
         password: new FormControl('', { 
             nonNullable: true, 
-            validators: [Validators.required, Validators.minLength(3)] 
+            validators: [Validators.required, Validators.minLength(8)] 
         }),
         email: new FormControl('', { 
             nonNullable: true, 
@@ -47,10 +51,19 @@ export class LoginFormComponent{
             password  
         };
         try {
+            this.isPendingLogin.set(true)
             const response = await this.signInUseCase.execute(dto)
             this.authStateService.setSession(response)
+            this.router.navigate(['/company/dashboard'])
+            
         } catch (error) {
-            console.log(error)
+            if(error instanceof AppError) {
+                this.errorMessage.set(error.message)
+                return
+            }
+            this.errorMessage.set('Error desconocido al intentar iniciar sesión. Por favor, inténtalo de nuevo.')
+        }finally{
+            this.isPendingLogin.set(false)
         }
     }
 }

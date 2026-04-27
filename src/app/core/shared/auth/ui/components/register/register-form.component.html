@@ -20,29 +20,80 @@
       @if (currentStep() === 1) {
         <div class="space-y-4 animate-in fade-in slide-in-from-right-4">
           <h2 class="text-2xl font-bold text-white">Crea tu cuenta</h2>
-          <input type="email" formControlName="email" placeholder="Correo corporativo" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
-          <input type="password" formControlName="password" placeholder="Contraseña segura" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
+          
+          <div>
+            <input type="email" formControlName="email" placeholder="Correo corporativo" 
+                   class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"
+                   [class.border-red-500]="form.get('email')?.invalid && form.get('email')?.touched">
+            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+              <p class="text-red-500 text-xs mt-1 ml-1 italic">Ingresa un correo válido</p>
+            }
+          </div>
+
+          <div>
+            <input type="password" formControlName="password" placeholder="Contraseña segura" 
+                   class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"
+                   [class.border-red-500]="form.get('password')?.invalid && form.get('password')?.touched">
+            @if (form.get('password')?.invalid && form.get('password')?.touched) {
+              <p class="text-red-500 text-xs mt-1 ml-1 italic">Mínimo 8 caracteres</p>
+            }
+          </div>
         </div>
       }
 
       @if (currentStep() === 2) {
         <div class="space-y-4 animate-in fade-in slide-in-from-right-4">
           <h2 class="text-2xl font-bold text-white">Sobre la empresa</h2>
-          <input type="text" formControlName="company_name" placeholder="Nombre de la empresa" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
-          <select formControlName="industry" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
-            <option value="" disabled selected>Selecciona el rubro</option>
-            <option value="tech">Tecnología</option>
-            <option value="retail">Retail / Comercio</option>
-            <option value="education">Educación</option>
-          </select>
+          
+          <div>
+            <input type="text" formControlName="company_name" placeholder="Nombre de la empresa" 
+                   class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"
+                   [class.border-red-500]="form.get('company_name')?.invalid && form.get('company_name')?.touched">
+            @if (form.get('company_name')?.invalid && form.get('company_name')?.touched) {
+              <p class="text-red-500 text-xs mt-1 ml-1 italic">El nombre es obligatorio</p>
+            }
+          </div>
+
+          <div>
+            <select formControlName="industry" 
+                    class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"
+                    [class.border-red-500]="form.get('industry')?.invalid && form.get('industry')?.touched">
+              <option value="" disabled selected>Selecciona el rubro</option>
+              <option value="tech">Tecnología</option>
+              <option value="retail">Retail / Comercio</option>
+              <option value="education">Educación</option>
+            </select>
+            @if (form.get('industry')?.invalid && form.get('industry')?.touched) {
+              <p class="text-red-500 text-xs mt-1 ml-1 italic">Selecciona un rubro</p>
+            }
+          </div>
         </div>
       }
 
       @if (currentStep() === 3) {
         <div class="space-y-4 animate-in fade-in slide-in-from-right-4">
           <h2 class="text-2xl font-bold text-white">Datos de contacto</h2>
-          <input type="text" formControlName="phone" placeholder="Número de celular" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none">
-          <textarea formControlName="description" placeholder="Breve descripción..." rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"></textarea>
+          
+          <div>
+            <input type="text" formControlName="phone" placeholder="Número de celular" 
+                   class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"
+                   [class.border-red-500]="form.get('phone')?.invalid && form.get('phone')?.touched">
+            @if (form.get('phone')?.invalid && form.get('phone')?.touched) {
+              <p class="text-red-500 text-xs mt-1 ml-1 italic">El teléfono es obligatorio</p>
+            }
+          </div>
+
+          <div>
+            <input type="text" formControlName="address" placeholder="Dirección física" 
+                   class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"
+                   [class.border-red-500]="form.get('address')?.invalid && form.get('address')?.touched">
+            @if (form.get('address')?.invalid && form.get('address')?.touched) {
+              <p class="text-red-500 text-xs mt-1 ml-1 italic">La dirección es obligatoria</p>
+            }
+          </div>
+
+          <textarea formControlName="description" placeholder="Breve descripción..." rows="3" 
+                    class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500/50 outline-none"></textarea>
         </div>
       }
 
@@ -54,15 +105,33 @@
         }
 
         @if (currentStep() < 3) {
-          <button type="button" (click)="nextStep()" class="flex-1 px-6 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-all">
+          <button 
+            type="button" 
+            (click)="nextStep()" 
+            class="flex-1 px-6 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-all">
             Continuar
           </button>
         } @else {
-          <button type="submit" [disabled]="form.invalid" class="flex-1 px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-500 disabled:opacity-50 transition-all shadow-lg shadow-emerald-900/20">
-            Finalizar Registro
+          <button 
+            type="submit" 
+            [disabled]="form.invalid || isPendingRegister()" 
+            class="relative flex-1 px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-500 disabled:opacity-70 transition-all shadow-lg shadow-emerald-900/20 flex items-center justify-center min-h-13">
+            
+            @if (isPendingRegister()) {
+              <app-loader size="xs" color="text-white" />
+            } @else {
+              <span>Finalizar Registro</span>
+            }
+            
           </button>
         }
       </div>
     </form>
+
+    @if (errorMessage()) {
+      <div class="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-center">
+        <p class="text-red-500 text-sm font-medium">{{ errorMessage() }}</p>
+      </div>
+    }
   </div>
 </div>

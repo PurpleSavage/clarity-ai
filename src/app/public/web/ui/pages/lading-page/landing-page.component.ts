@@ -6,6 +6,7 @@ import { OurFeaturesComponent } from "../../components/our-features/our-features
 import { ReadyTransformComponent } from "../../components/ready-transform/ready-transform.component";
 
 
+
 @Component({
     templateUrl:'./lading-page.component.html',
     standalone:true,

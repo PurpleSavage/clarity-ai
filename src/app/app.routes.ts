@@ -1,7 +1,10 @@
 import { Routes } from '@angular/router';
-import { LandingPageComponent } from './core/public/web/ui/pages/lading-page/landing-page.component';
-import { PublicLayoutComponent } from './core/public/public-shared/layouts/public-layout.component';
+
+import { PublicLayoutComponent } from './public/public-shared/layouts/public-layout.component';
 import { AuthLayoutComponent } from './core/shared/auth/ui/layouts/auth-layout.component';
+import { LandingPageComponent } from './public/web/ui/pages/lading-page/landing-page.component';
+import { CompaniesLayoutComponent } from './core/companies/companies-shared/ui/layouts/companies-layout.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -14,7 +17,7 @@ export const routes: Routes = [
             },
             {
                 path:'forum',
-                loadComponent:()=>import('./core/public/forum/ui/pages/forum-page.component')
+                loadComponent:()=>import('./core/forum/ui/pages/forum-page/forum-page.component')
                 .then(fp=>fp.ForumPageComponent)
             }
         ]
@@ -32,6 +35,19 @@ export const routes: Routes = [
                 path:'register',
                 loadComponent:()=>import('./core/shared/auth/ui/components/register/register-form.component')
                 .then(rf=>rf.RegisterFormComponent)
+            }
+        ]
+    },
+    {
+        path:'company',
+        component:CompaniesLayoutComponent,
+        canActivate: [authGuard],
+        canActivateChild: [authGuard],
+        children:[
+            {
+                path:'dashboard',
+                loadComponent:()=>import('./core/companies/dashboards/ui/pages/dashboard-page/dashboard-page.component')
+                .then(dp=>dp.DashboardPageComponent)
             }
         ]
     }
