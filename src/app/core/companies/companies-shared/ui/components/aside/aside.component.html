@@ -1,11 +1,19 @@
-<aside class="h-full w-full bg-[#0d0d0d] flex flex-col p-4 text-white">
-    <div class="mb-8 px-2 font-bold text-emerald-500 text-xl">
-        Mokka AI
+<aside class="h-full w-full bg-black flex flex-col text-white">
+    <div class="p-2 px-4 flex items-start flex-col gap-1 ">
+        <p class="font-bold text-emerald-500 text-xl">Clarity.Ai</p>
+        <p class="text-gray-400 text-sm">Relación con los clientes</p>
     </div>
     
-    <nav class="space-y-2">
-        <a class="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/5 border border-white/10">
-            <span class="text-sm">Dashboard</span>
-        </a>
+    <nav class="space-y-2 p-4">
+        @for (route of routes; track route.path) {
+            <a
+                [routerLink]="['/company', route.path]"
+                routerLinkActive="!bg-white/5 !border-white/10"
+                class="flex items-center gap-3 px-3 py-2 rounded-xl border border-transparent transition-colors hover:bg-white/5"
+            >
+                <svg [lucideIcon]="route.icon.icon" class="w-4 h-4 text-white/60"></svg>
+                <span class="text-sm text-white/80">{{ route.data?.['label'] }}</span>
+            </a>
+        }
     </nav>
 </aside>

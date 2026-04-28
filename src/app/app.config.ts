@@ -5,6 +5,8 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../environments/environment';
 import { AuthPort } from './core/shared/auth/application/ports/auth.port';
 import { AuthAdapterService } from './core/shared/auth/infrastructure/adapters/auth.service';
+import { RoomsPort } from './core/companies/rooms/application/ports/rooms.port';
+import { RoomAdapterService } from './core/companies/rooms/infrastructure/adapters/rooms.service';
 
 
 
@@ -21,6 +23,9 @@ export const appConfig: ApplicationConfig = {
       provide: AuthPort,        
       useClass: AuthAdapterService 
     },
-  
+    {
+      provide:RoomsPort,
+      useClass:RoomAdapterService
+    }
   ]
 };

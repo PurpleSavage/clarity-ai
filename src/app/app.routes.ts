@@ -43,11 +43,30 @@ export const routes: Routes = [
         component:CompaniesLayoutComponent,
         canActivate: [authGuard],
         canActivateChild: [authGuard],
-        children:[
+        children: [
             {
-                path:'dashboard',
-                loadComponent:()=>import('./core/companies/dashboards/ui/pages/dashboard-page/dashboard-page.component')
-                .then(dp=>dp.DashboardPageComponent)
+                path: 'dashboard',
+                data: { label: 'Dashboard', icon: 'layout-dashboard' },
+                loadComponent: () => import('./core/companies/dashboards/ui/pages/dashboard-page/dashboard-page.component')
+                    .then(dp => dp.DashboardPageComponent)
+            },
+            {
+                path: 'rooms',
+                data: { label: 'Rooms', icon: 'door-open' },
+                loadComponent: () => import('./core/companies/rooms/ui/pages/rooms-page/rooms-page.component')
+                    .then(rp => rp.RoomsPageComponent)
+            },
+            {
+                path:'roadmap',
+                data: { label: 'Roadmap', icon: 'road' },
+                loadComponent: () => import('./core/companies/road-maps/ui/pages/road-maps-page/road-maps-page.component')
+                    .then(rmp => rmp.RoadMapsPageComponent)
+            },
+            {
+                path:'settings',
+                data: { label: 'Settings', icon: 'settings' },
+                loadComponent: () => import('./core/companies/settings/ui/pages/settings-page/settings-page.component')
+                    .then(csp => csp.SettingsPageComponent)
             }
         ]
     }

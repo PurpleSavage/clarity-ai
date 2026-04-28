@@ -1,0 +1,27 @@
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOpen]="isOpen()"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    cdkConnectedOverlayBackdropClass="backdrop"
+    (backdropClick)="close()"
+>
+    <div class="fixed inset-0 flex items-center justify-center z-50">
+        <div 
+            class="relative w-full max-w-lg rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl p-6"
+            (click)="$event.stopPropagation()"
+        >
+            <!-- header -->
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-white font-semibold text-lg">{{ title() }}</h2>
+                <button 
+                    (click)="close()"
+                    class="p-1.5 rounded-lg hover:bg-white/5 transition-colors cursor-pointer">
+                    <svg lucideX class="w-4 h-4 text-white/60"></svg>
+                </button>
+            </div>
+
+            <!-- contenido hijo -->
+            <ng-content />
+        </div>
+    </div>
+</ng-template>

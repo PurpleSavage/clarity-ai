@@ -1,0 +1,74 @@
+<div class="space-y-5">
+    <div class="flex items-center">
+        <div class="space-y-2 flex-1">
+            <p class="text-3xl text-white font-bold">Administra tus rooms</p>
+            <p class="text-gray-600">Gestiona las habitaciones de tu empresa</p>
+        </div>
+        <button 
+            (click)="isModalOpen.set(true)" 
+            class="bg-white text-black px-6 py-1 flex items-center gap-2
+            rounded-lg font-semibold hover:bg-emerald-500 cursor-pointer
+            hover:text-white transition-colors duration-100"
+        >
+           <svg lucidePlus class="w-4 h-4 "></svg>  Agregar Room
+        </button>
+    </div>
+
+    <div class="flex items-center gap-2 justify-stasrt">
+        <button type="button" class="bg-white text-black hover:bg-gray-400 font-bold py-1 px-4 rounded">
+            Restaurar filtros
+        </button>
+        <app-dropdown 
+            [items]="filterItems" 
+            placeholder="Aplicar filtro"
+            (selected)="onFilter($event)" 
+        />
+
+    </div>
+    <!-- skeleton -->
+    @if (loading()) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            @for (item of [1,2,3,4,5,6]; track item) {
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 space-y-4 animate-pulse">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-xl bg-white/10"></div>
+                            <div class="w-24 h-4 rounded-lg bg-white/10"></div>
+                        </div>
+                        <div class="w-14 h-5 rounded-full bg-white/10"></div>
+                    </div>
+                    <div class="w-20 h-3 rounded-lg bg-white/10"></div>
+                    <div class="w-24 h-7 rounded-xl bg-white/10"></div>
+                    <div class="w-28 h-3 rounded-lg bg-white/10"></div>
+                </div>
+            }
+        </div>
+
+    <!-- empty -->
+    } @else if (rooms().length === 0) {
+        <div class="flex flex-col items-center justify-center py-20 gap-4">
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                <svg lucideHash class="w-8 h-8 text-white/20"></svg>
+            </div>
+            <p class="text-white/60 font-medium">Aún no tienes rooms creados</p>
+            <p class="text-white/30 text-sm">Crea tu primera sala para empezar a recibir feedback</p>
+        </div>
+
+    <!-- lista -->
+    } @else {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            @for (room of rooms(); track room.id) {
+                <app-room-card [room]="room" />
+            }
+        </div>
+    }
+</div>
+
+<app-modal
+    title="Agregar Room"
+    [isOpen]="isModalOpen()"
+    (closed)="isModalOpen.set(false)"
+>
+    <
+    <form>...</form>
+</app-modal>
